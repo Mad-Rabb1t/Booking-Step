@@ -1,9 +1,10 @@
 package app;
 
-import lesson15.app.controller.Controller;
-import lesson15.app.dao.DAOBooking;
-import lesson15.app.io.ConsoleMain;
-import lesson15.app.service.Service;
+
+import app.controller.Controller;
+import app.dao.DAOBooking;
+import app.io.ConsoleMain;
+import app.service.BookingService;
 
 public class MainApp {
   public static void main(String[] args) {
@@ -13,7 +14,7 @@ public class MainApp {
 //    DAOBooking daoBooking = new DAOBooking();
 //    DAOBooking daoBooking = new DAOBooking();
 //    DAOBooking daoBooking = new DAOBooking();
-    Service service = new Service(daoBooking);
+    BookingService service = new BookingService(daoBooking);
 //    Service service = new Service(daoBooking);
 //    Service service = new Service(daoBooking);
 //    Service service = new Service(daoBooking);
