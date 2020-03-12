@@ -3,19 +3,19 @@ package app.controller;
 
 import app.io.Console;
 import app.io.ConsoleMain;
-import app.service.Service;
+import app.service.BookingService;
 
 public class Controller {
-  Service service;
+  BookingService service;
   Console console;
 
-  public Controller(ConsoleMain console, Service service) {
+  public Controller(ConsoleMain console, BookingService service) {
     this.service = service;
     this.console = console;
   }
 
   public void show() {
-    service.getallFlights();
+    service.getAllBookings();
   }
 
   public void search() {
