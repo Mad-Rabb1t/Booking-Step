@@ -1,40 +1,40 @@
 package app.entity;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.*;
-import java.util.Calendar;
-import java.util.Date;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Flight {
-  int f_id;
-  Airport destination;
-  String date;
-  int free_spaces;
+  int fId;
+  String destination;
+  LocalDateTime date;
+  int freeSpaces;
 
-  public Flight(int f_id, Airport destination, String date, int free_spaces) {
-    this.f_id = f_id;
+  public Flight(int f_id, String destination, LocalDateTime date, int free_spaces) {
+    this.fId = f_id;
     this.destination = destination;
-//    LocalDateTime date =
-
      this.date = date;
-    this.free_spaces = free_spaces;
+    this.freeSpaces = free_spaces;
   }
 
-  public int getF_id() {
-    return f_id;
+  public int getfId() {
+    return fId;
   }
 
-  public Airport getDestination() {
+  public String getDestination() {
     return destination;
   }
 
-  public String getDate() {
+  public LocalDateTime getDate() {
     return date;
   }
 
-  public int getFree_spaces() {
-    return free_spaces;
+  public int getFreeSpaces() {
+    return freeSpaces;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Flight number %d from Kiev to %s on %s. Spaces available: %d}", fId, destination, date, freeSpaces);
   }
 }
