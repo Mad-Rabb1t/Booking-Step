@@ -1,5 +1,7 @@
 package app.dao;
 
+import app.entity.Flight;
+
 import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Predicate;
