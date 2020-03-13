@@ -2,6 +2,8 @@ package app.dao;
 
 
 
+import app.entity.Booking;
+
 import java.util.ArrayList;
 
 import java.util.Collection;
@@ -11,7 +13,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class DAOBooking<Booking> implements DAO<Booking> {
+public class DAOBooking implements DAO<Booking> {
 
   List<Booking> bookings = new ArrayList<>();
 
