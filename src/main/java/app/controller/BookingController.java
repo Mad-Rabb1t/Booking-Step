@@ -5,11 +5,11 @@ import app.io.Console;
 import app.io.ConsoleMain;
 import app.service.BookingService;
 
-public class Controller {
+public class BookingController {
   BookingService service;
   Console console;
 
-  public Controller(ConsoleMain console, BookingService service) {
+  public BookingController(ConsoleMain console, BookingService service) {
     this.service = service;
     this.console = console;
   }

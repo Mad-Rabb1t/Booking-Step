@@ -3,11 +3,11 @@ package app.entity;
 import java.util.function.Predicate;
 
 public class Predicates {
-    public Predicate<Booking> bookingsById(int id){
-        return bookings -> bookings.flight_id == id;
+    public static Predicate<Booking> bookingsByPass(String name, String surname){
+        return booking -> booking.people.contains(new Person(name, surname));
     }
 
-    public Predicate<Flight> flightsById(int id){
-        return bookings -> bookings.f_id == id;
+    public static Predicate<Flight> flightsById(int id){
+        return flight -> flight.f_id == id;
     }
 }
