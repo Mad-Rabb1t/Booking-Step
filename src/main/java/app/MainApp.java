@@ -4,10 +4,14 @@ package app;
 import app.controller.Controller;
 import app.dao.DAOBooking;
 import app.io.ConsoleMain;
+import app.io.Generator;
 import app.service.BookingService;
 
 public class MainApp {
   public static void main(String[] args) {
+
+    Generator g = new Generator();
+    g.generator();
 
     ConsoleMain console = new ConsoleMain();
     DAOBooking daoBooking = new DAOBooking();
