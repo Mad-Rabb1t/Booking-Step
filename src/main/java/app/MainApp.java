@@ -1,7 +1,7 @@
 package app;
 
 
-import app.controller.Controller;
+import app.controller.BookingController;
 import app.dao.DAOBooking;
 import app.io.ConsoleMain;
 import app.service.BookingService;
@@ -19,7 +19,7 @@ public class MainApp {
 //    Service service = new Service(daoBooking);
 //    Service service = new Service(daoBooking);
 //    Service service = new Service(daoBooking);
-    Controller controller = new Controller(console, service);
+    BookingController controller = new BookingController(console, service);
 //    Controller controller = new Controller(service);
 //    Controller controller = new Controller(service);
 //    Controller controller = new Controller(service);
