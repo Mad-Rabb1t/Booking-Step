@@ -17,4 +17,12 @@ public class Booking {
   public int getBook_id() {
     return book_id;
   }
+
+  public int getFlight_id() {
+    return flight_id;
+  }
+
+  public int getSeats(){
+    return people.size();
+  }
 }

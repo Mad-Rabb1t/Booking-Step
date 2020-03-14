@@ -42,13 +42,6 @@ public class DAOFlights implements DAO<Flight> {
         flights.remove(flights.iterator().next().getfId());
     }
 
-//    public void showFlightById(int id) {
-//        for (Flight f : flights) {
-//            if (f.getfId() == id) {
-//            }
-//        }
-//    }
-
     public void read() {
         try {
             DAO<Flight> flight = new DAOFlights();

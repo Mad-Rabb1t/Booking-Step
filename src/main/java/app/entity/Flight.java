@@ -33,6 +33,10 @@ public class Flight {
     return freeSpaces;
   }
 
+  public void occupySeats(int seats) {
+    freeSpaces -= seats;
+  }
+
   @Override
   public String toString() {
     return String.format("Flight number %d from Kiev to %s on %s. Spaces available: %d}", fId, destination, date, freeSpaces);

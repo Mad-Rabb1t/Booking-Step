@@ -10,7 +10,7 @@ import java.util.*;
 public class Generator {
 
     public void generator(){
-        List<Flight> fly = new ArrayList<Flight>();
+        List<Flight> fly = new ArrayList<>();
         List<Airport> cities = Arrays.asList(Airport.values());
         Random random = new Random();
 
@@ -22,14 +22,15 @@ public class Generator {
             int m = random.nextInt(60);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             String flightsDate = LocalDateTime.now().plusHours(h).plusDays(d).plusMinutes(m).format(formatter);
-            LocalDateTime ldt = LocalDateTime.parse(flightsDate, formatter);
+            LocalDateTime ldt = LocalDateTime.parse(flightsDate);
             fly.add(new Flight(i, String.valueOf(cities.get(random.nextInt(cities.size()))), ldt, randomSeats));
         }
         try {
             File file = new File("flights.txt");
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             for (Flight fl : fly){
-                String line = String.format("%d|%s|%s|%d", fl.getfId(), fl.getDestination(), fl.getDate(), fl.getFreeSpaces());
+                DateTimeFormatter form = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                String line = String.format("%d|%s|%s|%d", fl.getfId(), fl.getDestination(), fl.getDate().format(form), fl.getFreeSpaces());
                 bw.write(line);
                 bw.write("\n");
             }
