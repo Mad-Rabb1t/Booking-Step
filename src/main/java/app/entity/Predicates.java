@@ -11,6 +11,10 @@ public class Predicates {
         return booking -> booking.people.contains(new Person(name, surname));
     }
 
+    public static Predicate<Booking> bookingById(int id){
+        return booking -> booking.book_id == id;
+    }
+
     public static Predicate<Flight> flightsById(int id) {
         return flight -> flight.fId == id;
     }
