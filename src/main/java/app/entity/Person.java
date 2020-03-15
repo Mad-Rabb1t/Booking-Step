@@ -24,4 +24,9 @@ public class Person {
   public int hashCode() {
     return Objects.hash(first, last);
   }
+
+  @Override
+  public String toString() {
+    return String.format("%s %s\n", first, last);
+  }
 }

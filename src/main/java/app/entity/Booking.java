@@ -5,24 +5,30 @@ import java.util.List;
 public class Booking {
   List<Person> people;
 //  int user_id;
-  int flight_id;
-  int book_id;
+  int flightId;
+  int bookId;
 
-  public Booking(int book_id, int flight_id, List<Person> people){
-    this.book_id = book_id;
-    this.flight_id = flight_id;
+  public Booking(int bookId, int flightId, List<Person> people){
+    this.bookId = bookId;
+    this.flightId = flightId;
     this.people = people;
   }
 
-  public int getBook_id() {
-    return book_id;
+  public int getBookId() {
+    return bookId;
   }
 
-  public int getFlight_id() {
-    return flight_id;
+  public int getFlightId() {
+    return flightId;
   }
 
   public int getSeats(){
     return people.size();
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Booking number %d reserved for flight number %d, amount of passengers: %d\n", bookId, flightId,
+            people.size());
   }
 }

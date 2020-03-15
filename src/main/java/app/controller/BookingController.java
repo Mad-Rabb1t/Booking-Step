@@ -23,7 +23,7 @@ public class BookingController {
     String name = console.readLn();
     console.print("Enter surname: ");
     String surname = console.readLn();
-    console.printLn(service.getMyBookings(name,surname).iterator().next().toString());
+    service.getMyBookings(name,surname).forEach(booking -> console.printLn(booking.toString()));
   }
 
   public void book(int id, int numOfPass) {
@@ -44,7 +44,7 @@ public class BookingController {
 
   public int getFlightIdInBooking(int bookId){
     try {
-     return service.getBookingById(bookId).getFlight_id();
+     return service.getBookingById(bookId).getFlightId();
     } catch (Exception ex) {
       console.printLn(ex.getMessage());
     }

@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 
 public class FlightService {
 
-  DAOFlights flight;
+  DAOFlights flight = new DAOFlights();
 
   public ArrayList<Flight> getAllFlights() {
     return (ArrayList<Flight>) flight.getAll();
