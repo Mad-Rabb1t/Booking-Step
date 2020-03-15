@@ -8,11 +8,11 @@ import app.io.ConsoleMain;
 import app.io.Generator;
 import app.service.BookingService;
 
+import java.io.IOException;
+
 public class MainApp {
   public static void main(String[] args) {
 
-    Generator g = new Generator();
-    g.generator();
 
     ConsoleMain console = new ConsoleMain();
     DAOBooking daoBooking = new DAOBooking();
@@ -30,7 +30,16 @@ public class MainApp {
 //    Controller controller = new Controller(service);
     FlightController flightController = new FlightController();
 
-    while (true) {
+    try {
+      Generator g = new Generator();
+      g.generator();
+    } catch (IOException ex){
+      console.printLn("Couldn't find the file. Creating a new one...");
+    }
+
+    boolean exit = false;
+
+    while (!exit) {
       console.displayMainMenu();
       String input = console.readLn();
       switch (input) {
@@ -56,13 +65,18 @@ public class MainApp {
           console.printLn("Enter the id of booking to be cancelled: ");
           int id = Integer.parseInt(console.readLn());
           bookingController.cancel(id);
-          flightController.removeReservation(bookingController.getNumOfSeats(id),bookingController.getFlightIdInBooking(id));
+          flightController.removeReservation(bookingController.getNumOfSeats(id),
+                  bookingController.getFlightIdInBooking(id));
           break;
         }
 
         case "5": bookingController.show(); break;
-        case "6":
-        default:  break;
+        case "6":{
+//          ...
+          exit = true;
+          break;
+        }
+        default: console.printLn("Select item from 1 to 6\n"); break;
       }
     }
   }
