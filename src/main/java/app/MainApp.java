@@ -44,11 +44,11 @@ public class MainApp {
       String input = console.readLn();
       switch (input) {
         case "1": flightController.show24H(); break;
-        case "2": flightController.showInfo(Integer.parseInt(console.readLn())); break;
+        case "2": flightController.showInfo(); break;
         case "3": {
           console.print("Enter destination: ");
           String dest = console.readLn();
-          console.print("Enter desired date: ");
+          console.print("Enter desired date(in the following format: 'Day/Month/Year'): ");
           String date = console.readLn();
           console.print("Enter number of seats you wish to book:");
           int seats = Integer.parseInt(console.readLn());
@@ -64,9 +64,9 @@ public class MainApp {
         case "4": {
           console.printLn("Enter the id of booking to be cancelled: ");
           int id = Integer.parseInt(console.readLn());
-          bookingController.cancel(id);
           flightController.removeReservation(bookingController.getNumOfSeats(id),
                   bookingController.getFlightIdInBooking(id));
+          bookingController.cancel(id);
           break;
         }
 

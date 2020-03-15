@@ -8,20 +8,24 @@ import app.entity.Predicates;
 import java.time.LocalDate;
 
 public class FlightController {
-    FlightService service;
-    ConsoleMain console;
+    FlightService service = new FlightService();
+    ConsoleMain console = new ConsoleMain();
 
     public void show24H() {
-        console.printLn(service.getFlights24H().stream().toString());
+        service.getFlights24H().forEach(s -> console.printLn(s.toString()));
     }
 
-    public void showInfo(int flyId) {
+    public void showInfo() {
         console.print("Enter flight id: ");
-        console.printLn(service.getFlightBy(Predicates.flightsById(Integer.parseInt(console.readLn()))).toString());
+        try {
+            console.printLn(service.getFlightBy(Predicates.flightsById(Integer.parseInt(console.readLn()))).toString());
+        } catch (Exception ex){
+            console.printLn(ex.getMessage());
+        }
     }
 
     public void showFlightsByInfo(String dest, String date, int seats) {
-        console.printLn(service.getFlightsBy(dest,date,seats).stream().toString());
+        service.getFlightsBy(dest,date,seats).forEach(flight -> console.printLn(flight.toString()));
     }
 
     public void makeReservation(int seats, int id) {

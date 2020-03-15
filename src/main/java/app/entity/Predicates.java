@@ -2,8 +2,6 @@ package app.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.MonthDay;
-import java.util.Date;
 import java.util.function.Predicate;
 
 public class Predicates {
@@ -12,7 +10,7 @@ public class Predicates {
     }
 
     public static Predicate<Booking> bookingById(int id){
-        return booking -> booking.book_id == id;
+        return booking -> booking.bookId == id;
     }
 
     public static Predicate<Flight> flightsById(int id) {
@@ -21,7 +19,7 @@ public class Predicates {
 
     public static Predicate<Flight> flightByInfo(String dest, LocalDate d, int seats) {
         return flight -> flight.date.getMonth().equals(d.getMonth()) && flight.date.getDayOfMonth() == d.getDayOfMonth()
-                && flight.destination.equals(dest) && flight.freeSpaces >= seats;
+                && flight.destination.toLowerCase().equals(dest.toLowerCase().trim()) && flight.freeSpaces >= seats;
     }
 
     public static Predicate<Flight> flightIn24H() {
