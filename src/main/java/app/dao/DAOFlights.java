@@ -14,6 +14,9 @@ import java.util.stream.Collectors;
 public class DAOFlights implements DAO<Flight> {
     List<Flight> flights = new ArrayList<>();
 
+    public DAOFlights(){
+        read();
+    }
 
     @Override
     public Optional<Flight> get(int id) {
@@ -44,15 +47,14 @@ public class DAOFlights implements DAO<Flight> {
 
     public void read() {
         try {
-            DAO<Flight> flight = new DAOFlights();
-            File file = new File("C:\\Users\\iturk\\Desktop\\IBA\\Booking-Step\\flights.txt");
+            File file = new File("flights.txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] inf = line.trim().split("\\|");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                 LocalDateTime ldt = LocalDateTime.parse(inf[2], formatter);
-                flight.create(new Flight(Integer.parseInt(inf[0]), inf[1], ldt, Integer.parseInt(inf[3])));
+                create(new Flight(Integer.parseInt(inf[0]), inf[1], ldt, Integer.parseInt(inf[3])));
             }
         } catch (Exception ex) {
             System.out.println("File not found");
