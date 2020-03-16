@@ -1,17 +1,20 @@
 package app.controller;
 
 
+import app.entity.Flight;
 import app.io.ConsoleMain;
 import app.service.FlightService;
 import app.entity.Predicates;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 public class FlightController {
     FlightService service = new FlightService();
     ConsoleMain console = new ConsoleMain();
 
     public void show24H() {
+        console.printLn("Flights in the next 24 hours: ");
         service.getFlights24H().forEach(s -> console.printLn(s.toString()));
     }
 
@@ -19,13 +22,13 @@ public class FlightController {
         console.print("Enter flight id: ");
         try {
             console.printLn(service.getFlightBy(Predicates.flightsById(Integer.parseInt(console.readLn()))).toString());
-        } catch (Exception ex){
+        } catch (Exception ex) {
             console.printLn(ex.getMessage());
         }
     }
 
-    public void showFlightsByInfo(String dest, String date, int seats) {
-        service.getFlightsBy(dest,date,seats).forEach(flight -> console.printLn(flight.toString()));
+    public Collection<Flight> showFlightsByInfo(String dest, LocalDate date, int seats) {
+        return service.getFlightsBy(dest, date, seats);
     }
 
     public void makeReservation(int seats, int id) {

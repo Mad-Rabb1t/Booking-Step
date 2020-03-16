@@ -1,12 +1,14 @@
 package app.controller;
 
 
+import app.entity.Booking;
 import app.entity.Person;
 import app.io.Console;
 import app.io.ConsoleMain;
 import app.service.BookingService;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class BookingController {
@@ -23,7 +25,12 @@ public class BookingController {
     String name = console.readLn();
     console.print("Enter surname: ");
     String surname = console.readLn();
-    service.getMyBookings(name,surname).forEach(booking -> console.printLn(booking.toString()));
+    Collection<Booking> bookings = service.getMyBookings(name, surname);
+    if(bookings.size() == 0){
+      console.printLn("Bookings for specified person haven't been found!");
+    } else{
+      bookings.forEach(booking -> console.printLn(booking.toString()));
+    }
   }
 
   public void book(int id, int numOfPass) {

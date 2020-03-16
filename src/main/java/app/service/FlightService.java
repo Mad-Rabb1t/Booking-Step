@@ -8,6 +8,7 @@ import app.entity.Predicates;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Predicate;
@@ -31,10 +32,8 @@ public class FlightService {
             .orElseThrow(()-> new IllegalArgumentException("Flights with such parameters are not found"));
   }
 
-  public Collection<Flight> getFlightsBy(String dest, String date, int seats) {
-    return flight.getAllBy(Predicates.flightByInfo(dest,
-            LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-            seats));
+  public Collection<Flight> getFlightsBy(String dest, LocalDate date, int seats){
+    return flight.getAllBy(Predicates.flightByInfo(dest, date, seats));
   }
 
   public void occupySeats(int seats, int id){
