@@ -28,7 +28,11 @@ public class Booking {
 
   @Override
   public String toString() {
-    return String.format("Booking number %d reserved for flight number %d, amount of passengers: %d\n", bookId, flightId,
-            people.size());
+
+    StringBuilder sb = new StringBuilder();
+    people.forEach(person -> sb.append(person.toString()));
+
+    return String.format("Booking number %d reserved for flight number %d, amount of passengers: %d\nPassengers:\n%s", bookId, flightId,
+            people.size(), sb);
   }
 }

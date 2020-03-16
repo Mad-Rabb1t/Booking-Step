@@ -11,11 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class BookingService {
-    DAOBooking daoBooking;
-
-    public BookingService(DAOBooking daoBooking) {
-        this.daoBooking = daoBooking;
-    }
+    DAOBooking daoBooking = new DAOBooking();
 
     public ArrayList<Booking> getAllBookings() {
         return (ArrayList<Booking>) daoBooking.getAll();
@@ -45,10 +41,6 @@ public class BookingService {
         return "Booking with such id was not found";
     }
 
-    public Collection<Booking> getBookingsByPassenger(String name, String surname) {
-        return daoBooking.getAllBy(Predicates.bookingsByPass(name, surname));
-    }
-
     public Booking getBookingById(int id) {
         return daoBooking.getAll().stream().filter(Predicates.bookingById(id)).findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Booking was not found"));
@@ -57,6 +49,4 @@ public class BookingService {
     public int getNumOfSeats(int id) {
         return getBookingById(id).getSeats();
     }
-
-
 }

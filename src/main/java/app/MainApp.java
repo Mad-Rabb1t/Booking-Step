@@ -4,27 +4,32 @@ package app;
 import app.controller.BookingController;
 import app.controller.FlightController;
 import app.dao.DAOBooking;
+import app.entity.Flight;
 import app.io.ConsoleMain;
 import app.io.Generator;
 import app.service.BookingService;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Collection;
 
 public class MainApp {
   public static void main(String[] args) {
 
 
     ConsoleMain console = new ConsoleMain();
-    DAOBooking daoBooking = new DAOBooking();
 //    DAOBooking daoBooking = new DAOBooking();
 //    DAOBooking daoBooking = new DAOBooking();
 //    DAOBooking daoBooking = new DAOBooking();
-    BookingService service = new BookingService(daoBooking);
+
 //    Service service = new Service(daoBooking);
 //    Service service = new Service(daoBooking);
 //    Service service = new Service(daoBooking);
 //    Service service = new Service(daoBooking);
-    BookingController bookingController = new BookingController(console, service);
+    BookingController bookingController = new BookingController();
 //    Controller controller = new Controller(service);
 //    Controller controller = new Controller(service);
 //    Controller controller = new Controller(service);
@@ -34,7 +39,7 @@ public class MainApp {
       Generator g = new Generator();
       g.generator();
     } catch (IOException ex){
-      console.printLn("Couldn't find the file. Creating a new one...");
+      console.printLn("Couldn't find the database file. Creating a new one...");
     }
 
     boolean exit = false;
@@ -48,25 +53,51 @@ public class MainApp {
         case "3": {
           console.print("Enter destination: ");
           String dest = console.readLn();
-          console.print("Enter desired date(in the following format: 'Day/Month/Year'): ");
-          String date = console.readLn();
+          console.print("Enter desired date(in the following format: 'DD/MM/YYYY'): ");
+          LocalDate date ;
+          while(true) {
+            try {
+              date = LocalDate.parse(console.readLn(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+              break;
+            } catch(DateTimeParseException ex){
+              console.print("Invalid date format. Please enter in the appropriate format:");
+            }
+          }
           console.print("Enter number of seats you wish to book:");
           int seats = Integer.parseInt(console.readLn());
-          flightController.showFlightsByInfo(dest,date,seats);
-          console.print("Enter id of flight to book or '0' to return to main menu: ");
-          int id = Integer.parseInt(console.readLn());
-          if(id!=0) {
-            bookingController.book(id, seats);
-            flightController.makeReservation(seats, id);
+          Collection<Flight> foundFlights = flightController.showFlightsByInfo(dest, date, seats);
+          if(foundFlights.size() == 0){
+            console.printLn("Flights with specified parameters haven't been found");
+          } else {
+            console.printLn("Available flights: ");
+            foundFlights.forEach(flight -> console.printLn(flight.toString()));
+            console.print("Enter id of flight to book or '0' to return to main menu: ");
+            while (true) {
+              int id = Integer.parseInt(console.readLn());
+              if (id == 0) break;
+              if (foundFlights.contains(new Flight(id))) {
+                  bookingController.book(id, seats);
+                  flightController.makeReservation(seats, id);
+                  console.printLn("Booking has been created!");
+                  break;
+              } else {
+                console.print("Enter id of one of the flights above or '0' to return to main menu: ");
+              }
+            }
           }
           break;
         }
+
         case "4": {
-          console.printLn("Enter the id of booking to be cancelled: ");
+          console.print("Enter the id of booking to be cancelled: ");
           int id = Integer.parseInt(console.readLn());
-          flightController.removeReservation(bookingController.getNumOfSeats(id),
-                  bookingController.getFlightIdInBooking(id));
-          bookingController.cancel(id);
+          try {
+            flightController.removeReservation(bookingController.getNumOfSeats(id),
+                    bookingController.getFlightIdInBooking(id));
+            bookingController.cancel(id);
+          } catch (Exception ex){
+            console.printLn(ex.getMessage());
+          }
           break;
         }
 
