@@ -4,6 +4,7 @@ import app.entity.Booking;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ class DAOBookingTest {
     DAOBooking daoBooking;
 
     @BeforeEach
-    public void initialize() {
+    public void initialize() throws IOException {
         this.daoBooking = new DAOBooking();
     }
 
