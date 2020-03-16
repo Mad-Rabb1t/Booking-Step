@@ -27,6 +27,6 @@ public class Person {
 
   @Override
   public String toString() {
-    return String.format("%s %s\n", first, last);
+    return String.format("%s %s", first, last);
   }
 }

@@ -5,6 +5,7 @@ import app.service.FlightService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +17,7 @@ class FlightServiceTest {
   private FlightService service;
 
   @BeforeEach
-  public void initialize() {
+  public void initialize() throws IOException {
     this.service = new FlightService();
   }
 

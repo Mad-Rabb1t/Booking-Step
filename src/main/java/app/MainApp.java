@@ -3,15 +3,10 @@ package app;
 
 import app.controller.BookingController;
 import app.controller.FlightController;
-import app.dao.DAOBooking;
 import app.entity.Flight;
 import app.io.ConsoleMain;
-import app.io.Generator;
-import app.service.BookingService;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
@@ -19,28 +14,9 @@ import java.util.Collection;
 public class MainApp {
   public static void main(String[] args) {
 
-
     ConsoleMain console = new ConsoleMain();
-//    DAOBooking daoBooking = new DAOBooking();
-//    DAOBooking daoBooking = new DAOBooking();
-//    DAOBooking daoBooking = new DAOBooking();
-
-//    Service service = new Service(daoBooking);
-//    Service service = new Service(daoBooking);
-//    Service service = new Service(daoBooking);
-//    Service service = new Service(daoBooking);
     BookingController bookingController = new BookingController();
-//    Controller controller = new Controller(service);
-//    Controller controller = new Controller(service);
-//    Controller controller = new Controller(service);
     FlightController flightController = new FlightController();
-
-    try {
-      Generator g = new Generator();
-      g.generator();
-    } catch (IOException ex){
-      console.printLn("Couldn't find the database file. Creating a new one...");
-    }
 
     boolean exit = false;
 
@@ -49,7 +25,9 @@ public class MainApp {
       String input = console.readLn();
       switch (input) {
         case "1": flightController.show24H(); break;
+
         case "2": flightController.showInfo(); break;
+
         case "3": {
           console.print("Enter destination: ");
           String dest = console.readLn();
@@ -102,11 +80,15 @@ public class MainApp {
         }
 
         case "5": bookingController.show(); break;
+
         case "6":{
-//          ...
+          flightController.close();
+          bookingController.close();
+          console.printLn("Closing application...");
           exit = true;
           break;
         }
+
         default: console.printLn("Select item from 1 to 6\n"); break;
       }
     }

@@ -4,6 +4,8 @@ package app.service;
 import app.dao.DAOFlights;
 import app.entity.Flight;
 import app.entity.Predicates;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +14,9 @@ import java.util.function.Predicate;
 public class FlightService {
 
   DAOFlights flight = new DAOFlights();
+
+  public FlightService() throws IOException {
+  }
 
   public ArrayList<Flight> getAllFlights() {
     return (ArrayList<Flight>) flight.getAll();
@@ -36,5 +41,7 @@ public class FlightService {
     getFlightBy(Predicates.flightsById(id)).occupySeats(seats);
   }
 
-
+  public void save() throws IOException {
+    flight.write();
+  }
 }
