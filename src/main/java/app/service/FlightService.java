@@ -27,7 +27,6 @@ public class FlightService {
     return (ArrayList<Flight>) flight.getAllBy(Predicates.flightIn24H());
   }
 
-
   public Flight getFlightBy(Predicate<Flight> p) {
     return getAllFlights().stream().filter(p).findFirst()
             .orElseThrow(()-> new IllegalArgumentException("Flights with such parameters are not found"));
