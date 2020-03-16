@@ -3,7 +3,6 @@ package app.controller;
 
 import app.entity.Booking;
 import app.entity.Person;
-import app.io.Console;
 import app.io.ConsoleMain;
 import app.service.BookingService;
 
@@ -12,13 +11,8 @@ import java.util.Collection;
 import java.util.List;
 
 public class BookingController {
-  BookingService service;
-  Console console;
-
-  public BookingController(ConsoleMain console, BookingService service) {
-    this.service = service;
-    this.console = console;
-  }
+  BookingService service = new BookingService();
+  ConsoleMain console = new ConsoleMain();
 
   public void show() {
     console.print("Enter name: ");

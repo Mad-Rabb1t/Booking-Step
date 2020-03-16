@@ -4,11 +4,7 @@ package app.service;
 import app.dao.DAOFlights;
 import app.entity.Flight;
 import app.entity.Predicates;
-
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Predicate;

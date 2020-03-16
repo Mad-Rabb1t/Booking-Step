@@ -21,16 +21,15 @@ public class MainApp {
 
 
     ConsoleMain console = new ConsoleMain();
-    DAOBooking daoBooking = new DAOBooking();
 //    DAOBooking daoBooking = new DAOBooking();
 //    DAOBooking daoBooking = new DAOBooking();
 //    DAOBooking daoBooking = new DAOBooking();
-    BookingService service = new BookingService(daoBooking);
+
 //    Service service = new Service(daoBooking);
 //    Service service = new Service(daoBooking);
 //    Service service = new Service(daoBooking);
 //    Service service = new Service(daoBooking);
-    BookingController bookingController = new BookingController(console, service);
+    BookingController bookingController = new BookingController();
 //    Controller controller = new Controller(service);
 //    Controller controller = new Controller(service);
 //    Controller controller = new Controller(service);

@@ -11,11 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class BookingService {
-    DAOBooking daoBooking;
-
-    public BookingService(DAOBooking daoBooking) {
-        this.daoBooking = daoBooking;
-    }
+    DAOBooking daoBooking = new DAOBooking();
 
     public ArrayList<Booking> getAllBookings() {
         return (ArrayList<Booking>) daoBooking.getAll();
