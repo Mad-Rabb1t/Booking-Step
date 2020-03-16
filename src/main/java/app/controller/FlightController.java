@@ -14,8 +14,12 @@ public class FlightController {
     ConsoleMain console = new ConsoleMain();
 
     public void show24H() {
-        console.printLn("Flights in the next 24 hours: ");
-        service.getFlights24H().forEach(s -> console.printLn(s.toString()));
+        if(service.getFlights24H().size() == 0){
+            console.printLn("No flights available for the next 24 hours!");
+        } else {
+            console.printLn("Flights in the next 24 hours: ");
+            service.getFlights24H().forEach(s -> console.printLn(s.toString()));
+        }
     }
 
     public void showInfo() {

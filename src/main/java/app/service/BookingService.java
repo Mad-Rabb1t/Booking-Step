@@ -32,6 +32,7 @@ public class BookingService {
     }
 
     public String deleteBooking(int id) {
+
         for (Booking booking : getAllBookings()) {
             if (booking.getBookId() == id) {
                 getAllBookings().remove(booking);

@@ -16,8 +16,8 @@ public class Person {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Person person = (Person) o;
-    return Objects.equals(first, person.first) &&
-            Objects.equals(last, person.last);
+    return Objects.equals(first.toLowerCase().trim(), person.first.toLowerCase().trim()) &&
+            Objects.equals(last.toLowerCase().trim(), person.last.toLowerCase().trim());
   }
 
   @Override
