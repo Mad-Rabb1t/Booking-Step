@@ -6,12 +6,16 @@ import app.entity.Booking;
 import app.entity.Person;
 import app.entity.Predicates;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class BookingService {
     DAOBooking daoBooking = new DAOBooking();
+
+    public BookingService() throws IOException {
+    }
 
     public ArrayList<Booking> getAllBookings() {
         return (ArrayList<Booking>) daoBooking.getAll();
@@ -32,6 +36,7 @@ public class BookingService {
     }
 
     public String deleteBooking(int id) {
+
         for (Booking booking : getAllBookings()) {
             if (booking.getBookId() == id) {
                 getAllBookings().remove(booking);
@@ -48,5 +53,9 @@ public class BookingService {
 
     public int getNumOfSeats(int id) {
         return getBookingById(id).getSeats();
+    }
+
+    public void save() throws IOException {
+        daoBooking.write();
     }
 }

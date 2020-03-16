@@ -4,15 +4,16 @@ import app.entity.Flight;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class FlightServiceTest {
-    FlightService flightService = new FlightService();
+    FlightService flightService;
 
     @BeforeEach
-    public void initialize() {
+    public void initialize() throws IOException {
         this.flightService = new FlightService();
     }
 

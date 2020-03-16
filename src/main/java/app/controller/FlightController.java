@@ -6,16 +6,30 @@ import app.io.ConsoleMain;
 import app.service.FlightService;
 import app.entity.Predicates;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collection;
 
 public class FlightController {
-    FlightService service = new FlightService();
     ConsoleMain console = new ConsoleMain();
 
+    FlightService service;
+
+    {
+        try {
+            service = new FlightService();
+        } catch (IOException e) {
+            console.printLn("Something went wrong in Java's file reader!");
+        }
+    }
+
     public void show24H() {
-        console.printLn("Flights in the next 24 hours: ");
-        service.getFlights24H().forEach(s -> console.printLn(s.toString()));
+        if(service.getFlights24H().size() == 0){
+            console.printLn("No flights available for the next 24 hours!");
+        } else {
+            console.printLn("Flights in the next 24 hours: ");
+            service.getFlights24H().forEach(s -> console.printLn(s.toString()));
+        }
     }
 
     public void showInfo() {
@@ -37,6 +51,14 @@ public class FlightController {
 
     public void removeReservation(int seats, int id) {
         service.occupySeats(seats * (-1), id);
+    }
+
+    public void close(){
+        try {
+            service.save();
+        } catch(Exception ex){
+            console.printLn("Aliens broke your JVM!");
+        }
     }
 
 }
