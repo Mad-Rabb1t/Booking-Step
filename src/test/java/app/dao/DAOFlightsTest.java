@@ -1,12 +1,12 @@
 package app.dao;
 
 import app.entity.Flight;
-import app.service.BookingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,33 +30,23 @@ class DAOFlightsTest {
     @Test
     void getAll() {
         daoFlights.getAll();
-        List<Flight> flights= daoFlights.flights;
+        List<Flight> flights = daoFlights.flights;
         assertEquals(daoFlights.getAll(), flights);
-    }
-
-    @Test
-    void getAllBy() {
-
     }
 
     @Test
     void create() {
         Flight flight = new Flight(20, "Baku", null, 25);
         daoFlights.create(flight);
-        daoFlights.flights.get(10);
-        assertEquals(flight, daoFlights.flights.get(10));
+        assertEquals(flight, daoFlights.flights.get(30));
     }
 
     @Test
     void delete() {
-        Flight flight = new Flight(11, "Baku", null, 25);
+        Flight flight = new Flight(31, "Baku", LocalDateTime.parse("03/04/2020 09:50",
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), 25);
         daoFlights.create(flight);
-        daoFlights.delete(10);
-       assertEquals(daoFlights.flights.get(9), flight);
-    }
-
-    @Test
-    void read() {
-
+        daoFlights.delete(29);
+        assertEquals(flight, daoFlights.flights.get(29));
     }
 }
