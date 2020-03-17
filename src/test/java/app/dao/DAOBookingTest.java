@@ -37,26 +37,21 @@ class DAOBookingTest {
     }
 
     @Test
-    void getAllBy() {
-
-    }
-
-    @Test
     void create() {
-        Booking booking = new Booking(1, 1, null);
+        Booking booking = new Booking(4, 1, null);
         daoBooking.create(booking);
-        assertEquals(daoBooking.bookings.get(0), booking);
+        assertEquals(daoBooking.bookings.get(3), booking);
 
     }
 
     @Test
     void delete() {
-        Booking booking1 = new Booking(1, 1, null);
-        Booking booking2 = new Booking(2, 2, null);
+        Booking booking1 = new Booking(4, 1, null);
+        Booking booking2 = new Booking(5, 2, null);
         daoBooking.bookings.add(booking1);
         daoBooking.bookings.add(booking2);
         daoBooking.delete(0);
-        assertEquals(daoBooking.bookings.get(0), booking2);
+        assertEquals(daoBooking.bookings.get(3), booking2);
 
     }
 }

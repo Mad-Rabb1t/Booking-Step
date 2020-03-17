@@ -1,16 +1,12 @@
 package app.service;
 
-import app.dao.DAOBooking;
 import app.entity.Booking;
 import app.entity.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,27 +20,17 @@ class BookingServiceTest {
 
     @Test
     void getAllBookings() {
-        Booking booking = new Booking(1, 1, null);
-        bookingService.daoBooking.create(booking);
-        ArrayList<Booking> bookings = new ArrayList<>();
-        bookings.add(booking);
-        bookingService.getAllBookings();
-        assertEquals(bookingService.getAllBookings(), bookings);
-    }
-
-    @Test
-    void getMyBookings() {
-
+        int bookings = 3;
+        assertEquals(bookings, bookingService.getAllBookings().size());
     }
 
     @Test
     void createBooking() {
-        Booking booking = (new Booking(1, 3, null));
-        List<Booking> book = new ArrayList<>();
-        book.add(booking);
-        bookingService.createBooking(3, null);
-        List<Booking> bookings = (List<Booking>) bookingService.daoBooking.getAll();
-        assertEquals(book, bookings);//It does not work
+        ArrayList<Person> people = new ArrayList<>(Collections.singletonList(new Person("Turkan", "Ismayilova")));
+        Booking booking = (new Booking(4, 3, people));
+        bookingService.createBooking(3, people);
+        ArrayList<Booking> bookings = (ArrayList<Booking>) bookingService.daoBooking.getAll();
+        assertEquals(booking.toString(), bookings.get(3).toString());
     }
 
     @Test
@@ -52,20 +38,25 @@ class BookingServiceTest {
         Booking booking = new Booking(1, 1, null);
         bookingService.daoBooking.create(booking);
         bookingService.deleteBooking(0);
-        String expected = "Booking deleted";
-        assertEquals(bookingService.deleteBooking(1), "Booking deleted");
+        assertEquals("Booking deleted", bookingService.deleteBooking(1));
     }
 
     @Test
     void getBookingById() {
-
+        Booking booking = bookingService.getAllBookings().get(0);
+        assertEquals(booking, bookingService.getBookingById(1));
+        try {
+            assertEquals(booking, bookingService.getBookingById(15));
+        } catch (Exception ex){
+            assertEquals("Booking was not found", ex.getMessage());
+        }
     }
 
     @Test
     void getNumOfSeats() {
         Person mary = new Person("Mary", "Black");
         Person michael = new Person("Michael", "Black");
-        Booking booking = new Booking(1, 1, new ArrayList<Person>(Arrays.asList(mary, michael)));
+        Booking booking = new Booking(1, 1, new ArrayList<>(Arrays.asList(mary, michael)));
         bookingService.daoBooking.create(booking);
         int x = bookingService.getNumOfSeats(1);
         assertEquals(x, 2);

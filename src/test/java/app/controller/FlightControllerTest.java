@@ -1,15 +1,7 @@
 package app.controller;
 
-import app.entity.Flight;
-import app.service.FlightService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,14 +18,14 @@ class FlightControllerTest {
     void makeReservation() {
         controller.makeReservation(2, 1);
         int x = controller.service.getAllFlights().get(0).getFreeSpaces();
-        assertEquals(x, 105);
+        assertEquals(60, x);
     }
 
     @Test
     void removeReservation() {
-        controller.makeReservation(2, 1);
-        controller.removeReservation(2, 1);
-        int y = controller.service.getAllFlights().get(0).getFreeSpaces();
-        assertEquals(y, 107);
+        controller.makeReservation(2, 2);
+        controller.removeReservation(2, 2);
+        int y = controller.service.getAllFlights().get(1).getFreeSpaces();
+        assertEquals(98, y);
     }
 }
