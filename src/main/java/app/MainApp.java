@@ -42,7 +42,7 @@ public class MainApp {
             }
           }
           console.print("Enter number of seats you wish to book:");
-          int seats = Integer.parseInt(console.readLn());
+          int seats = console.consumeInt();
           Collection<Flight> foundFlights = flightController.showFlightsByInfo(dest, date, seats);
           if(foundFlights.size() == 0){
             console.printLn("Flights with specified parameters haven't been found");
@@ -51,7 +51,7 @@ public class MainApp {
             foundFlights.forEach(flight -> console.printLn(flight.toString()));
             console.print("Enter id of flight to book or '0' to return to main menu: ");
             while (true) {
-              int id = Integer.parseInt(console.readLn());
+              int id = console.consumeInt();
               if (id == 0) break;
               if (foundFlights.contains(new Flight(id))) {
                   bookingController.book(id, seats);
@@ -68,7 +68,7 @@ public class MainApp {
 
         case "4": {
           console.print("Enter the id of booking to be cancelled: ");
-          int id = Integer.parseInt(console.readLn());
+          int id = console.consumeInt();
           try {
             flightController.removeReservation(bookingController.getNumOfSeats(id),
                     bookingController.getFlightIdInBooking(id));

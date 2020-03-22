@@ -4,7 +4,7 @@ package app.controller;
 import app.entity.Flight;
 import app.io.ConsoleMain;
 import app.service.FlightService;
-import app.entity.Predicates;
+import app.entity.FlightPredicates;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -35,7 +35,7 @@ public class FlightController {
     public void showInfo() {
         console.print("Enter flight id: ");
         try {
-            console.printLn(service.getFlightBy(Predicates.flightsById(Integer.parseInt(console.readLn()))).toString());
+            console.printLn(service.getFlightBy(FlightPredicates.flightsById(Integer.parseInt(console.readLn()))).toString());
         } catch (Exception ex) {
             console.printLn(ex.getMessage());
         }

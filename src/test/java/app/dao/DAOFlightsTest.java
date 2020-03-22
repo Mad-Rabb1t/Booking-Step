@@ -1,6 +1,7 @@
 package app.dao;
 
 import app.entity.Flight;
+import app.entity.FlightPredicates;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,6 +33,13 @@ class DAOFlightsTest {
         daoFlights.getAll();
         List<Flight> flights = daoFlights.flights;
         assertEquals(daoFlights.getAll(), flights);
+    }
+
+    @Test
+    void getAllBy(){
+        Flight fl = new Flight(2020, "LA", LocalDateTime.now().plusHours(6), 100);
+        daoFlights.getAll().add(fl);
+        assertTrue(daoFlights.getAllBy(FlightPredicates.flightsById(2020)).contains(fl));
     }
 
     @Test

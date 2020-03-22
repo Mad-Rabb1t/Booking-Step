@@ -3,8 +3,8 @@ package app.service;
 
 import app.dao.DAOBooking;
 import app.entity.Booking;
+import app.entity.BookingPredicates;
 import app.entity.Person;
-import app.entity.Predicates;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class BookingService {
     }
 
     public Collection<Booking> getMyBookings(String name, String surname) {
-        return daoBooking.getAllBy(Predicates.bookingsByPass(name, surname));
+        return daoBooking.getAllBy(BookingPredicates.bookingsByPass(name, surname));
     }
 
     public void createBooking(int fId, List<Person> passengers) {
@@ -47,7 +47,7 @@ public class BookingService {
     }
 
     public Booking getBookingById(int id) {
-        return daoBooking.getAll().stream().filter(Predicates.bookingById(id)).findFirst()
+        return daoBooking.getAll().stream().filter(BookingPredicates.bookingById(id)).findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Booking was not found"));
     }
 

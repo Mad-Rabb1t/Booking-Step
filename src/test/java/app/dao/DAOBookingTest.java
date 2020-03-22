@@ -1,11 +1,14 @@
 package app.dao;
 
 import app.entity.Booking;
+import app.entity.BookingPredicates;
+import app.entity.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +37,15 @@ class DAOBookingTest {
         daoBooking.bookings.add(booking);
         List<Booking> book = (ArrayList<Booking>)daoBooking.getAll();
         assertEquals(daoBooking.bookings, book);
+    }
+
+    @Test
+    void getAllBy(){
+        Person mary = new Person("Mary", "Black");
+        Person michael = new Person("Michael", "Black");
+        Booking booking = new Booking(1, 1, new ArrayList<>(Arrays.asList(mary, michael)));
+        daoBooking.bookings.add(booking);
+        assertTrue(daoBooking.getAllBy(BookingPredicates.bookingById(1)).contains(booking));
     }
 
     @Test

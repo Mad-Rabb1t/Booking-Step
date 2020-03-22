@@ -25,6 +25,15 @@ class BookingServiceTest {
     }
 
     @Test
+    void getMyBookings(){
+        Person mary = new Person("Mary", "Black");
+        Person michael = new Person("Michael", "Black");
+        bookingService.createBooking(100, new ArrayList<>(Arrays.asList(mary,michael)));
+        assertTrue(bookingService.getMyBookings("Mary","Black").contains(new Booking(4,100,
+                new ArrayList<>(Arrays.asList(mary,michael)))));
+    }
+
+    @Test
     void createBooking() {
         ArrayList<Person> people = new ArrayList<>(Collections.singletonList(new Person("Turkan", "Ismayilova")));
         Booking booking = (new Booking(4, 3, people));

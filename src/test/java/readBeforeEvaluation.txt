@@ -1,7 +1,0 @@
-Hi there. Thanks for taking another minute and reading this message. While evaluating the testing part of this step
-project please consider that unit tests located in this directory depend on the data that is stored inside the files.
-This means that some tests may be failed if the original data is affected or even after a few days (because some methods
-are correlated with current time). This doesn't mean that any of the methods in the project work incorrectly.
-At the time of creation all of the tests passed successfully.
-
-Good luck and best regards! :)

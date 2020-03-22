@@ -3,7 +3,7 @@ package app.service;
 
 import app.dao.DAOFlights;
 import app.entity.Flight;
-import app.entity.Predicates;
+import app.entity.FlightPredicates;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -24,7 +24,7 @@ public class FlightService {
 
 
   public ArrayList<Flight> getFlights24H() {
-    return (ArrayList<Flight>) flight.getAllBy(Predicates.flightIn24H());
+    return (ArrayList<Flight>) flight.getAllBy(FlightPredicates.flightIn24H());
   }
 
   public Flight getFlightBy(Predicate<Flight> p) {
@@ -33,11 +33,11 @@ public class FlightService {
   }
 
   public Collection<Flight> getFlightsBy(String dest, LocalDate date, int seats){
-    return flight.getAllBy(Predicates.flightByInfo(dest, date, seats));
+    return flight.getAllBy(FlightPredicates.flightByInfo(dest, date, seats));
   }
 
   public void occupySeats(int seats, int id){
-    getFlightBy(Predicates.flightsById(id)).occupySeats(seats);
+    getFlightBy(FlightPredicates.flightsById(id)).occupySeats(seats);
   }
 
   public void save() throws IOException {
