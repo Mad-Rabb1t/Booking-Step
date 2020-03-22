@@ -16,6 +16,16 @@ public class ConsoleMain implements Console {
     return sc.nextLine();
   }
 
+  public int consumeInt(){
+    do {
+      try {
+        return Integer.parseInt(readLn());
+      } catch (Exception ex) {
+        print("Invalid input! Please enter a number: ");
+      }
+    } while (true);
+  }
+
   public void displayMainMenu(){
     print("================================================================\n");
     print("                         Main menu                              \n");

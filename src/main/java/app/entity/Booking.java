@@ -1,6 +1,7 @@
 package app.entity;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Booking {
   List<Person> people;
@@ -30,6 +31,19 @@ public class Booking {
     StringBuilder sb = new StringBuilder();
     people.forEach(person -> sb.append(person.toString()).append("~"));
     return sb.toString();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Booking booking = (Booking) o;
+    return bookId == booking.bookId;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(bookId);
   }
 
   @Override
